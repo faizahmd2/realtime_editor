@@ -204,7 +204,7 @@ export class EditorDurableObject {
         await this.env.REALTIME_EDITOR_CACHE.put(
           `editor:${this.editorId}`,
           this.content,
-          { expirationTtl: 3600 } // 1 hour
+          { expirationTtl: 60 } // 1 minute TTL
         );
       }
     } catch (error) {

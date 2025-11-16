@@ -1,13 +1,12 @@
 {
-  "name": "realtime-editor",
+  "name": "realtime_editor",
   "version": "1.0.0",
   "description": "Realtime editor on Cloudflare Workers",
   "main": "src/index.js",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "db:init": "wrangler d1 execute realtime --file=./schema.sql",
-    "db:create": "wrangler d1 create realtime",
+    "db:init": "wrangler d1 execute realtime_editor --file=./schema.sql",
     "kv:create": "wrangler kv namespace create REALTIME_EDITOR_CACHE",
     "tail": "wrangler tail"
   },
