@@ -1,8 +1,8 @@
-name = "realtime-editor"
+name = "realtime_editor"
 main = "src/index.js"
-compatibility_date = "2024-01-01"
+compatibility_date = "2025-11-16"
 
-# D1 Database (replaces MongoDB)
+# D1 Database
 [[d1_databases]]
 binding = "DB"
 database_name = "realtime_editor"
