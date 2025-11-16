@@ -89,6 +89,11 @@ export default {
         
         // Delete from KV cache
         await env.REALTIME_EDITOR_CACHE.delete(`editor:${editorId}`);
+
+        // Reset Durable Object state
+        const id = env.EDITOR.idFromName(editorId);
+        const stub = env.EDITOR.get(id);
+        await stub.fetch(new Request(`${url.origin}/reset`, { method: 'POST' }));
         
         return new Response(JSON.stringify({ success: true }), {
           headers: { 'Content-Type': 'application/json', ...corsHeaders }

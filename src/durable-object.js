@@ -25,6 +25,16 @@ export class EditorDurableObject {
       });
     }
 
+    // Handle reset request from main worker
+    if (url.pathname === '/reset') {
+      this.content = '';
+      this.editorId = null;
+      this.sessions.clear();
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     return new Response('Not Found', { status: 404 });
   }
 
@@ -190,8 +200,8 @@ export class EditorDurableObject {
       this.lastSaved = now;
 
       // Also cache in KV for faster access
-      if (this.env.CACHE) {
-        await this.env.CACHE.put(
+      if (this.env.REALTIME_EDITOR_CACHE) {
+        await this.env.REALTIME_EDITOR_CACHE.put(
           `editor:${this.editorId}`,
           this.content,
           { expirationTtl: 3600 } // 1 hour
