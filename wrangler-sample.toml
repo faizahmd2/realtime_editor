@@ -1,0 +1,31 @@
+name = "realtime-editor"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# D1 Database (replaces MongoDB)
+[[d1_databases]]
+binding = "DB"
+database_name = "realtime_editor"
+database_id = "your-database-id-here"
+
+# KV Storage (for caching)
+[[kv_namespaces]]
+binding = "REALTIME_EDITOR_CACHE"
+id = "your-kv-id-here"
+
+# Durable Objects (for real-time collaboration)
+[[durable_objects.bindings]]
+name = "EDITOR"
+class_name = "EditorDurableObject"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["EditorDurableObject"]
+
+# Environment variables
+[vars]
+SAVE_INTERVAL = "60000"
+CLEANUP_INTERVAL = "300000"
+
+# Secrets (set with: wrangler secret put ENCRYPTION_KEY)
+# ENCRYPTION_KEY = "your-encryption-key"
